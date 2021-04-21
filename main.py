@@ -7,8 +7,8 @@ RED = "#e7305b"
 GREEN = "#9bdeac"
 YELLOW = "#f7f5dd"
 FONT_NAME = "Courier"
-WORK_MIN = 0
-WORK_SEC = 15
+WORK_MIN = 25
+WORK_SEC = 60
 SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 20
 mark = ''
@@ -22,9 +22,9 @@ window.config(padx=100, pady=100, bg=YELLOW)
 
 def start():
     global WORK_MIN
-    WORK_MIN = 0
+    WORK_MIN = 25
     global WORK_SEC
-    WORK_SEC = 15
+    WORK_SEC = 60
     timer_txt.config(text='Work', fg=GREEN)
     canvas.itemconfig(canv_txt, text=f'{WORK_MIN}:{WORK_SEC}')
     timer()
@@ -48,8 +48,10 @@ def timer():
             canvas.itemconfig(canv_txt, text=f'0{WORK_MIN}:{WORK_SEC}')
         else:
             canvas.itemconfig(canv_txt, text=f'{WORK_MIN}:{WORK_SEC}')
-        if WORK_MIN < 5:
+        if WORK_MIN <= 5:
             timer_txt.config(text='Break', fg=PINK)
+        if WORK_MIN < 1:
+            window.attributes('-topmost', True)
     else:
         global mark
         mark += '✔'
